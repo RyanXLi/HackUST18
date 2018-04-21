@@ -1,52 +1,68 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {Button} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import logo from './logo.svg';
 import './App.css';
+import { Button, Header, Icon, Modal, Input} from 'semantic-ui-react';
 import AV from 'leancloud-storage';
-import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
-    const currentUser = AV.User.current();
     super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.state = {isLoggedIn: false};
+    AV.User.logIn('jojo', '12345678').then(function (loginedUser) {
+      console.log(loginedUser);
+    }, function (error) {
+      console.log(error);
+    });
+    this.state = {
+      login: false,
+      name: "jojo",
+    }
   }
 
-  handleLoginClick() {
-    this.setState({isLoggedIn: true});
-  }
 
-  Log() {
-    console.log("hahah");
-  }
-/*
   renderLogin() {
-    if (this.state.isLoggedIn) {
-      return <div>{currentUser.getUsername()}</div>
+    if (this.state.login) {
+      return this.state.name;
     }
     else {
-      return(
+      return (
         <div>
-          <ModalBasicExample loginCallback={()=>this.handleLoginClick()}/>
+          <ModalBasicExample
+            className="login"
+            callback={() => this.Log()}
+            name="login"
+            content="Login Form"
+          />
+          <ModalBasicExample
+            className="sign"
+            callback={() => this.Log()}
+            name="sign up"
+            content="Sign Up Form"
+          />
         </div>
       )
     }
   }
 
-*/
+  Log() {
+    this.setState({login: true})
+    console.log("hahah");
+  }
+
   render() {
     return (
       <div className="App">
-          <Button primary>Yo</Button>
         <Router>
           <div>
             <header className="App-header">
               {/*<img src={logo} className="App-logo" alt="logo" />*/}
-              <h1 className="App-title">Welcome to React</h1>
-              <ModalBasicExample loginCallback={() => this.Log()}/>
+              <div className="App-Title">
+                <h1 className="App-title">Welcome to React</h1>
+                <div className="Butts">
+                  {this.renderLogin()}
+                </div>
+              </div>
               <div className="Nav">
                 <Link className="Nav-item" to="/">MainPage</Link>
                 <Link className="Nav-item" to="/catalog">CatalogPage</Link>
@@ -133,22 +149,33 @@ const Topic = ({ match }) => (
 );
 
 
-const ModalBasicExample = (loginCallback) => (
-  <Modal trigger={<Button>Basic Modal</Button>} basic size='small'>
-    <Header icon='archive' content='Archive Old Messages' />
-    <Modal.Content>
-      <p>Your inbox is getting full, would you like us to enable automatic archiving of old messages?</p>
-    </Modal.Content>
-    <Modal.Actions>
-      <Button basic color='red' inverted onClick={() => loginCallback()}>
-        <Icon name='remove' /> No
-      </Button>
-      <Button color='green' inverted onClick={() => loginCallback()}>
-        <Icon name='checkmark' /> Yes
-      </Button>
-    </Modal.Actions>
-  </Modal>
-)
+class ModalBasicExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
 
+  render() {
+      return (
+          <Modal trigger={<Button>{this.props.name}</Button>} basic size='small' style={{margin: "auto"}} closeIcon>
+            <Header icon='archive' content={this.props.content} />
+            <Modal.Content>
+              <Input focus placeholder='User Name'/>
+              <br/>
+              <br/>
+              <Input focus placeholder='Password' type="password" />
+            </Modal.Content>
+            <Modal.Actions>
+              <Button color='green' inverted onClick={this.props.callback}>
+                <Icon name='checkmark' /> Submit
+              </Button>
+            </Modal.Actions>
+          </Modal>);
+
+  }
+}
 
 export default App;
