@@ -3,8 +3,8 @@
  */
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
-import CourseList from 'CourseList';
-import PersonList from 'PersonList';
+import CourseList from './CourseList';
+import PersonList from './PersonList';
 
 class CatalogPage extends Component {
 
@@ -12,6 +12,8 @@ class CatalogPage extends Component {
         super()
         this.style = {
             bg: {
+                paddingLeft: '50px',
+                paddingRight: '50px',
 
             }
         }
@@ -19,14 +21,14 @@ class CatalogPage extends Component {
 
     render() {
         return (
-            <div>
+            <div style={this.style.bg}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width={3}>
+                        <Grid.Column width={7}>
                             <CourseList />
                         </Grid.Column>
-                        <Grid.Column width={4}>
-                            <PersonList />
+                        <Grid.Column width={9}>
+                            {/*<PersonList />*/}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
