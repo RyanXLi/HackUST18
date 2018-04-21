@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import 'semantic-ui-css/semantic.min.css';
 import logo from './logo.svg';
 import './App.css';
 
+import CatalogPage from './Component/CatalogPage'
+import BecomeTutorPage from './Component/BecomeTutorPage'
+
 class App extends Component {
+    constructor() {
+        super()
+        this.style = {
+            blank: {
+                height: '50px'
+            }
+        }
+    }
   render() {
     return (
       <div className="App">
@@ -12,6 +24,7 @@ class App extends Component {
             <header className="App-header">
               {/*<img src={logo} className="App-logo" alt="logo" />*/}
               <h1 className="App-title">Welcome to React</h1>
+
               <div className="Nav">
                 <Link className="Nav-item" to="/">MainPage</Link>
                 <Link className="Nav-item" to="/catalog">CatalogPage</Link>
@@ -21,9 +34,10 @@ class App extends Component {
                 <Link className="Nav-item" to="/topics">Topics</Link>
               </div>
             </header>
+              <div style={this.style.blank}></div>
             <Route exact path="/" component={MainPage} />
             <Route path="/catalog" component={CatalogPage} />
-            <Route path="/becomeTutor" component={BecomeLecturerPage} />
+            <Route path="/becomeTutor" component={BecomeTutorPage} />
             <Route path="/myArrangement" component={MyArrangementPage} />
             <Route path="/personalInfoPage" component={PersonalInfoPage} />
             <Route path="/topics" component={Topics}/>
@@ -40,17 +54,17 @@ const MainPage = () => (
   </div>
 );
 
-const CatalogPage = () => (
-  <div>
-    <h2>CatalogPage</h2>
-  </div>
-);
+// const CatalogPage = () => (
+//   <div>
+//     <h2>CatalogPage</h2>
+//   </div>
+// );
 
-const BecomeLecturerPage = () => (
-  <div>
-    <h2>BecomeLecturerPage</h2>
-  </div>
-);
+// const BecomeLecturerPage = () => (
+//   <div>
+//     <h2>BecomeLecturerPage</h2>
+//   </div>
+// );
 
 const MyArrangementPage = () => (
   <div>
