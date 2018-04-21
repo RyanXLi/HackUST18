@@ -10,23 +10,23 @@ class App extends Component {
         <Router>
           <div>
             <header className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
+              {/*<img src={logo} className="App-logo" alt="logo" />*/}
               <h1 className="App-title">Welcome to React</h1>
-              <ul>
-                <li>
-                  <Link to="/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/about">About</Link>
-                </li>
-                <li>
-                  <Link to="/topics">Topics</Link>
-                </li>
-              </ul>
+              <div className="Nav">
+                <Link className="Nav-item" to="/">MainPage</Link>
+                <Link className="Nav-item" to="/catalog">CatalogPage</Link>
+                <Link className="Nav-item" to="/becomeTutor">Become Tutor</Link>
+                <Link className="Nav-item" to="/myArrangement">My Arrangements</Link>
+                <Link className="Nav-item" to="/personalInfoPage">Personal</Link>
+                <Link className="Nav-item" to="/topics">Topics</Link>
+              </div>
             </header>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/topics" component={Topics} />
+            <Route exact path="/" component={MainPage} />
+            <Route path="/catalog" component={CatalogPage} />
+            <Route path="/becomeTutor" component={BecomeLecturerPage} />
+            <Route path="/myArrangement" component={MyArrangementPage} />
+            <Route path="/personalInfoPage" component={PersonalInfoPage} />
+            <Route path="/topics" component={Topics}/>
           </div>
         </Router>
       </div>
@@ -34,17 +34,38 @@ class App extends Component {
   }
 }
 
-const Home = () => (
+const MainPage = () => (
   <div>
-    <h2>Home</h2>
+    <h2>MainPage</h2>
   </div>
 );
 
-const About = () => (
+const CatalogPage = () => (
   <div>
-    <h2>About</h2>
+    <h2>CatalogPage</h2>
   </div>
 );
+
+const BecomeLecturerPage = () => (
+  <div>
+    <h2>BecomeLecturerPage</h2>
+  </div>
+);
+
+const MyArrangementPage = () => (
+  <div>
+    <h2>MyArrangementPage</h2>
+  </div>
+);
+
+
+const PersonalInfoPage = () => (
+  <div>
+    <h2>PersonalInfoPage</h2>
+  </div>
+);
+
+
 
 const Topics = ({ match }) => (
   <div>
@@ -65,7 +86,7 @@ const Topics = ({ match }) => (
     <Route
       exact
       path={match.url}
-      render={() => <h3>Please select a topic.</h3>}
+      render={() => <h3>Please select a topic</h3>}
     />
   </div>
 );
