@@ -6,6 +6,9 @@ import './App.css';
 import { Button, Header, Icon, Modal, Input} from 'semantic-ui-react';
 import AV from 'leancloud-storage';
 
+import CatalogPage from './Component/CatalogPage'
+import BecomeTutorPage from './Component/BecomeTutorPage'
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +21,12 @@ class App extends Component {
       login: false,
       name: "jojo",
     }
+        this.style = {
+            blank: {
+                height: '50px'
+            }
+        }
   }
-
-
   renderLogin() {
     if (this.state.login) {
       return this.state.name;
@@ -72,9 +78,10 @@ class App extends Component {
                 <Link className="Nav-item" to="/topics">Topics</Link>
               </div>
             </header>
+              <div style={this.style.blank}></div>
             <Route exact path="/" component={MainPage} />
             <Route path="/catalog" component={CatalogPage} />
-            <Route path="/becomeTutor" component={BecomeLecturerPage} />
+            <Route path="/becomeTutor" component={BecomeTutorPage} />
             <Route path="/myArrangement" component={MyArrangementPage} />
             <Route path="/personalInfoPage" component={PersonalInfoPage} />
             <Route path="/topics" component={Topics}/>
@@ -91,17 +98,17 @@ const MainPage = () => (
   </div>
 );
 
-const CatalogPage = () => (
-  <div>
-    <h2>CatalogPage</h2>
-  </div>
-);
+// const CatalogPage = () => (
+//   <div>
+//     <h2>CatalogPage</h2>
+//   </div>
+// );
 
-const BecomeLecturerPage = () => (
-  <div>
-    <h2>BecomeLecturerPage</h2>
-  </div>
-);
+// const BecomeLecturerPage = () => (
+//   <div>
+//     <h2>BecomeLecturerPage</h2>
+//   </div>
+// );
 
 const MyArrangementPage = () => (
   <div>

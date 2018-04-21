@@ -13,7 +13,7 @@ class CourseListItem extends Component {
                 textAlign: 'center',
             }
         }
-        this.courseName = "Zong ZHAO"//TODO
+        this.courseName = "LOVE 1010"//TODO
     }
 
 
