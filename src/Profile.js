@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import {Grid, Button, Image} from 'semantic-ui-react';
+import {Grid} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import profilePic from './profile.png';
-
+import AV from 'leancloud-storage';
 
 
 
 class Profile extends Component {
     constructor(props) {
+        const currentUser = AV.User.current();
         super(props)
         this.style = {
             content: {
@@ -21,10 +22,10 @@ class Profile extends Component {
                 backgroundImage: "url('./profile.png')"
             }
         }
-        this.Signature= 'qweq';
-        this.Telephone= '123456';
-        this.Credit= '25';
-        this.SelfDescription = 'HI';
+        this.Username=currentUser.getUsername();
+        this.Email= currentUser.getEmail();
+        this.Credit= currentUser.get('credit');
+        this.SelfDescription = currentUser.get('description');
 
 
     }
@@ -34,62 +35,67 @@ class Profile extends Component {
     render() {
         return(
             <div>
-            <div style={{height:120}}></div>
+                <div style={{height:60}}></div>
 
-            <Grid>
-                <Grid.Row style={{borderColor:'blue', height: 200}} >
-                        <Grid.Column width={2}>
+                <Grid>
+                    <Grid.Row style={{borderColor:'blue', height: 200}} >
 
-                        </Grid.Column>
 
-                        <Grid.Column width={4}>
+                        <Grid.Column width={5}>
 
-                            <img style={{width: 150, height: 150}} src = {profilePic}/>
+                            <img style={{width: 150, height: 150}} src = {profilePic} />
 
                         </Grid.Column>
 
                         <Grid.Column width={5}>
-                            <Grid.Row style={{height: 60}}></Grid.Row>
-                            <h3 align="left">Signature:{this.Signature}</h3>
-                            <h3 align="left">Telephone: {this.Telephone}</h3>
+                            <Grid.Row style={{height: 10}}></Grid.Row>
+                            <h3 align="left">User name:{this.Username}</h3>
+                            <h3 align="left">E-mail: {this.Email}</h3>
                         </Grid.Column>
 
                         <Grid.Column width = {5}>
-                            <Grid.Row style={{height: 60}}></Grid.Row>
+                            <Grid.Row style={{height: 10}}></Grid.Row>
                             <h3>Credit: {this.Credit}</h3>
                         </Grid.Column>
-                </Grid.Row>
-                <Grid.Column width={2}></Grid.Column>
-                <p align="left">Self-description :{this.SelfDescription}</p>
-                <div style={this.style.blank}> </div>
-                <Grid.Row height={2}></Grid.Row>
-
-                <Grid.Row>
-                <Grid.Column width = {8}>
-
-
-                <div>
-
-                    <Grid.Row width={8}>
-                        <h1 > Comment1 </h1>
                     </Grid.Row>
-                    <Grid.Row width={8}>
-                        <h1 > Comment2</h1>
-                    </Grid.Row>
-                    <Grid.Row width={8}>
-                        <h1 > Comment3 </h1>
+                    <Grid.Row>
+                        <Grid.Column width = {1}></Grid.Column>
+                        <Grid.Column width = {8}>
+                            <p align="left">Self-description :{this.SelfDescription}</p>
+                        </Grid.Column>
+
                     </Grid.Row>
 
+                    <Grid.Row style={{height:50}}></Grid.Row>
 
-                {/*<BottomBar/>*/}
-                </div>
-              </Grid.Column>
-              <Grid.Column width = {8}>
-                  <h1 > Ratings</h1>
+                    <Grid.Row>
+                        <Grid.Column width = {8}>
 
-              </Grid.Column>
-                </Grid.Row>
-            </Grid>
+                            <Grid.Row>
+                              <h1 >My Comments</h1>
+                            </Grid.Row>
+
+                            <Grid.Row style={{height:30 }}></Grid.Row>
+
+                            <Grid.Row width={8}>
+                                <h4 > Comment1 </h4>
+                            </Grid.Row>
+                            <Grid.Row width={8}>
+                                <h4 > Comment2</h4>
+                            </Grid.Row>
+                            <Grid.Row width={8}>
+                                <h4 > Comment3 </h4>
+                            </Grid.Row>
+
+
+
+                        </Grid.Column>
+                        <Grid.Column width = {8}>
+                            <h1 > My Ratings</h1>
+
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }
