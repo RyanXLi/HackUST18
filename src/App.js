@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Grid, Menu } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import logo from './logo.svg';
 import './App.css';
+import Profile from './Profile.js';
 import { Button, Header, Icon, Modal, Input} from 'semantic-ui-react';
 import AV from 'leancloud-storage';
 
 import CatalogPage from './Component/CatalogPage'
 import BecomeTutorPage from './Component/BecomeTutorPage'
 import MainPage from './Component/MainPage'
+import logo from './Assets/logo.svg'
 
 class App extends Component {
   constructor(props) {
@@ -23,8 +25,49 @@ class App extends Component {
       name: "jojo",
     }
         this.style = {
-            blank: {
-                height: '50px'
+            leftMenu: {
+                backgroundColor: '#6495ED',
+                position:'absolute',
+                top: "0",
+                bottom: '0',
+                right:'0',
+                left:'0'
+            },
+            grid:{
+                height: '900px',
+            },
+            gridCol:{
+                paddingLeft: '0px',
+                paddingRight: '0px',
+            },
+            menuItem:{
+                height: '17%',
+                textAlign: 'center',
+
+                // flex box
+                display: '-ms-flexbox',
+                display: '-webkit-flex',
+                display: 'flex',
+
+                msFlexAlign: 'center',
+                webkitAlignItems: 'center',
+                webkitBoxAlign: 'center',
+                alignItems: 'center',
+                justifyContent:'center',
+
+            },
+            logo: {
+                // height: '200px',
+                bgColor:'#87CEFA',
+            },
+            link:{
+                // position: 'relative',
+                // top: '50%',
+                // transform: 'translateY(-50%)',
+                textAlign: 'center',
+                fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
+                fontSize: '20px',
+                color: '#ffffff',
             }
         }
   }
@@ -59,34 +102,41 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" >
         <Router>
-          <div>
-            <header className="App-header">
-              {/*<img src={logo} className="App-logo" alt="logo" />*/}
-              <div className="App-Title">
-                <h1 className="App-title">Welcome to React</h1>
-                <div className="Butts">
-                  {this.renderLogin()}
-                </div>
-              </div>
-              <div className="Nav">
-                <Link className="Nav-item" to="/">MainPage</Link>
-                <Link className="Nav-item" to="/catalog">CatalogPage</Link>
-                <Link className="Nav-item" to="/becomeTutor">Become Tutor</Link>
-                <Link className="Nav-item" to="/myArrangement">My Arrangements</Link>
-                <Link className="Nav-item" to="/personalInfoPage">Personal</Link>
-                <Link className="Nav-item" to="/topics">Topics</Link>
-              </div>
-            </header>
-              <div style={this.style.blank}></div>
-            <Route exact path="/" component={MainPage} />
-            <Route path="/catalog" component={CatalogPage} />
-            <Route path="/becomeTutor" component={BecomeTutorPage} />
-            <Route path="/myArrangement" component={MyArrangementPage} />
-            <Route path="/personalInfoPage" component={PersonalInfoPage} />
-            <Route path="/topics" component={Topics}/>
-          </div>
+          <Grid style={this.style.grid}>
+            <Grid.Row>
+
+                  <Grid.Column width={4} style={this.style.gridCol}>
+                      <Menu style={this.style.leftMenu} pointing vertical borderless>
+                          <Menu.Item style={this.style.menuItem} borderless onClick={(e)=>{}}>
+                              <div className="logo" >
+                                  {/*<img src={logo} />*/}
+                              </div>
+                          </Menu.Item>
+                          <Menu.Item style={this.style.menuItem} borderless onClick={(e)=>{}}>
+                              <Link to="/" style={this.style.link}>Introduction</Link>
+                          </Menu.Item>
+                          <Menu.Item style={this.style.menuItem} borderless onClick={(e)=>{}}>
+                              <Link to="/catalog" style={this.style.link}>Catalog</Link>
+                          </Menu.Item>
+                          <Menu.Item style={this.style.menuItem} borderless onClick={(e)=>{}}>
+                              <Link to="/becomeTutor" style={this.style.link}>Become A Tutor</Link>
+                          </Menu.Item>
+                          <Menu.Item style={this.style.menuItem} borderless onClick={(e)=>{}}>
+                              <Link to="/schedule" style={this.style.link}>Schedule</Link>
+                          </Menu.Item>
+                        {/*<Link className="Nav-item" to="/personalInfoPage">Personal</Link>*/}
+                      </Menu>
+                  </Grid.Column>
+                  <Grid.Column width={12}>
+                    <Route exact path="/" component={MainPage} />
+                    <Route path="/catalog" component={CatalogPage} />
+                    <Route path="/becomeTutor" component={BecomeTutorPage} />
+                    <Route path="/schedule" component={Profile} />
+                  </Grid.Column>
+            </Grid.Row>
+          </Grid>
         </Router>
       </div>
     );
@@ -112,7 +162,7 @@ const MainPage = () => (
 //   </div>
 // );
 
-const MyArrangementPage = () => (
+const Schedule = () => (
   <div>
     <h2>MyArrangementPage</h2>
   </div>

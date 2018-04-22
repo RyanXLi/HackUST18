@@ -28,7 +28,7 @@ class CatalogPage extends Component {
                             <CourseList />
                         </Grid.Column>
                         <Grid.Column width={9}>
-                            {/*<PersonList />*/}
+                            <PersonList />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

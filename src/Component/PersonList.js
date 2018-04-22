@@ -37,22 +37,16 @@ class PersonList extends Component {
             }
 
         }
-        this.state.activeItem = 0
+        this.setState({activeItem: 0})
     }
 
 
-
-    getStyle(index) {
-        // TODO: distinguish better
-        if (index === this.activeItem) {
-            return Object.assign({}, this.style.item,
-                {backgroundColor: this.activeColor},
-            )
-        } else {
-            return Object.assign({}, this.style.item,
-                {backgroundColor: this.regularColor})
+    makeOnClick(x) {
+        return function (e) {
+            this.setState({activeItem: x})
         }
     }
+
 
 
     render() {
@@ -60,7 +54,7 @@ class PersonList extends Component {
             <Menu pointing vertical style={this.style.menu} fluid>
                 {[0, 1, 2, 3, 4, 5, 6, 7].map((x, i) =>
                     <Menu.Item key={x.toString()} name={x.toString()}
-                               style={this.state.activeItem === x ? this.style.active : this.style.nonActive } onclick={((e) => this.state.activeItem = x).bind(this)}>
+                               style={this.activeItem === x ? this.style.active : this.style.nonActive } onClick={this.makeOnClick(x).bind(this)}>
                         <PersonListItem id={x}/>
                     </Menu.Item>
                 )}
