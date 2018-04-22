@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Grid, Button, Image} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-import profilePic from './profile.png';
+// import profilePic from './profile.png';
 
 
 
@@ -44,7 +44,6 @@ class Profile extends Component {
 
                         <Grid.Column width={4}>
 
-                            <img style={{width: 150, height: 150}} src = {profilePic}/>
 
                         </Grid.Column>
 

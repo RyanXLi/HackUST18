@@ -161,7 +161,7 @@ class App extends Component {
                                     <Search size="large" style={this.style.search}/>
                                   </Grid.Column>
                                   <Grid.Column width={3}>
-
+                                  {this.renderLogin()}
                                   </Grid.Column>
                               </Grid.Row>
                           </Grid>
