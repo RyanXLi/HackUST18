@@ -8,6 +8,7 @@ import AV from 'leancloud-storage';
 
 import CatalogPage from './Component/CatalogPage'
 import BecomeTutorPage from './Component/BecomeTutorPage'
+import MainPage from './Component/MainPage'
 
 class App extends Component {
   constructor(props) {
@@ -92,12 +93,13 @@ class App extends Component {
   }
 }
 
+/*
 const MainPage = () => (
   <div>
     <h2>MainPage</h2>
   </div>
 );
-
+*/
 // const CatalogPage = () => (
 //   <div>
 //     <h2>CatalogPage</h2>
