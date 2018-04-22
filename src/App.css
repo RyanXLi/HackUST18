@@ -7,11 +7,20 @@
   height: 80px;
 }
 
+.App-Title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .App-header {
   background-color: DodgerBlue;
   height: 80px;
   padding: 20px;
   color: white;
+}
+
+.Butts {
+  align-self: flex-end;
 }
 
 .Nav {

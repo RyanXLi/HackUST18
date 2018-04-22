@@ -14,7 +14,7 @@ class CatalogPage extends Component {
             bg: {
                 paddingLeft: '50px',
                 paddingRight: '50px',
-
+                fontSize: '16px'
             }
         }
     }
@@ -24,10 +24,10 @@ class CatalogPage extends Component {
             <div style={this.style.bg}>
                 <Grid>
                     <Grid.Row>
-                        <Grid.Column width={7}>
+                        <Grid.Column width={4}>
                             <CourseList />
                         </Grid.Column>
-                        <Grid.Column width={9}>
+                        <Grid.Column width={12}>
                             <PersonList />
                         </Grid.Column>
                     </Grid.Row>

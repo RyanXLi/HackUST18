@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Search } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import Profile from './Profile.js';
+import { Button, Header, Icon, Modal, Input} from 'semantic-ui-react';
+import AV from 'leancloud-storage';
 
 import CatalogPage from './Component/CatalogPage'
 import BecomeTutorPage from './Component/BecomeTutorPage'
+import MainPage from './Component/MainPage'
 import logo from './Assets/logo.svg'
 
 class App extends Component {
-    constructor() {
-        super()
+  constructor(props) {
+    super(props);
+    AV.User.logIn('jojo', '12345678').then(function (loginedUser) {
+      console.log(loginedUser);
+    }, function (error) {
+      console.log(error);
+    });
+    this.state = {
+      login: false,
+      name: "jojo",
+    }
         this.style = {
             leftMenu: {
                 backgroundColor: '#6495ED',
                 position:'absolute',
                 top: "0",
                 bottom: '0',
-                right:'0',
-                left:'0'
+                width: '100%',
             },
             grid:{
                 height: '900px',
@@ -56,9 +67,63 @@ class App extends Component {
                 fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
                 fontSize: '20px',
                 color: '#ffffff',
+            },
+
+            rightCol: {
+
+            },
+            rightTopBox: {
+                paddingTop: '40px',
+                paddingBottom: '40px',
+            },
+            search: {
+
+            },
+            leftAlign: {
+                paddingLeft: '65px',
+                paddingRight: '65px',
+                // flex box
+                display: '-ms-flexbox',
+                display: '-webkit-flex',
+                display: 'flex',
+
+                msFlexAlign: 'right',
+                webkitAlignItems: 'right',
+                webkitBoxAlign: 'right',
+                alignItems: 'right',
+                justifyContent: 'right',
             }
         }
+  }
+  renderLogin() {
+    if (this.state.login) {
+      return this.state.name;
     }
+    else {
+      return (
+        <div>
+          <ModalBasicExample
+            className="login"
+            callback={() => this.Log()}
+            name="login"
+            content="Login Form"
+          />
+          <ModalBasicExample
+            className="sign"
+            callback={() => this.Log()}
+            name="sign up"
+            content="Sign Up Form"
+          />
+        </div>
+      )
+    }
+  }
+
+  Log() {
+    this.setState({login: true})
+    console.log("hahah");
+  }
+
   render() {
     return (
       <div className="App" >
@@ -88,11 +153,25 @@ class App extends Component {
                         {/*<Link className="Nav-item" to="/personalInfoPage">Personal</Link>*/}
                       </Menu>
                   </Grid.Column>
-                  <Grid.Column width={12}>
-                    <Route exact path="/" component={MainPage} />
-                    <Route path="/catalog" component={CatalogPage} />
-                    <Route path="/becomeTutor" component={BecomeTutorPage} />
-                    <Route path="/schedule" component={Profile} />
+                  <Grid.Column width={12} style={this.style.rightCol}>
+                      <div style={this.style.rightTopBox}>
+                          <Grid>
+                              <Grid.Row>
+                                  <Grid.Column width={13} style={this.style.leftAlign}>
+                                    <Search size="large" style={this.style.search}/>
+                                  </Grid.Column>
+                                  <Grid.Column width={3}>
+
+                                  </Grid.Column>
+                              </Grid.Row>
+                          </Grid>
+                      </div>
+                      <div>
+                        <Route exact path="/" component={MainPage} />
+                        <Route path="/catalog" component={CatalogPage} />
+                        <Route path="/becomeTutor" component={BecomeTutorPage} />
+                        <Route path="/schedule" component={Schedule} />
+                      </div>
                   </Grid.Column>
             </Grid.Row>
           </Grid>
@@ -102,12 +181,13 @@ class App extends Component {
   }
 }
 
+/*
 const MainPage = () => (
   <div>
     <h2>MainPage</h2>
   </div>
 );
-
+*/
 // const CatalogPage = () => (
 //   <div>
 //     <h2>CatalogPage</h2>
@@ -165,5 +245,34 @@ const Topic = ({ match }) => (
   </div>
 );
 
+
+class ModalBasicExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  render() {
+      return (
+          <Modal trigger={<Button>{this.props.name}</Button>} basic size='small' style={{margin: "auto"}} closeIcon>
+            <Header icon='archive' content={this.props.content} />
+            <Modal.Content>
+              <Input focus placeholder='User Name'/>
+              <br/>
+              <br/>
+              <Input focus placeholder='Password' type="password" />
+            </Modal.Content>
+            <Modal.Actions>
+              <Button color='green' inverted onClick={this.props.callback}>
+                <Icon name='checkmark' /> Submit
+              </Button>
+            </Modal.Actions>
+          </Modal>);
+
+  }
+}
 
 export default App;
