@@ -13,7 +13,6 @@
     "semantic-ui-css": "^2.2.10",
     "semantic-ui-react": "^0.68.0",
     "react-color": "^2.11.7"
-
   },
   "scripts": {
     "start": "react-scripts start",

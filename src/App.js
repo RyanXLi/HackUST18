@@ -3,14 +3,27 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Grid, Menu, Search } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
+import Profile from './Profile.js';
+import { Button, Header, Icon, Modal, Input} from 'semantic-ui-react';
+import AV from 'leancloud-storage';
 
 import CatalogPage from './Component/CatalogPage'
 import BecomeTutorPage from './Component/BecomeTutorPage'
+import MainPage from './Component/MainPage'
 import logo from './Assets/logo.svg'
 
 class App extends Component {
-    constructor() {
-        super()
+  constructor(props) {
+    super(props);
+    AV.User.logIn('jojo', '12345678').then(function (loginedUser) {
+      console.log(loginedUser);
+    }, function (error) {
+      console.log(error);
+    });
+    this.state = {
+      login: false,
+      name: "jojo",
+    }
         this.style = {
             leftMenu: {
                 backgroundColor: '#6495ED',
@@ -81,7 +94,36 @@ class App extends Component {
                 justifyContent: 'right',
             }
         }
+  }
+  renderLogin() {
+    if (this.state.login) {
+      return this.state.name;
     }
+    else {
+      return (
+        <div>
+          <ModalBasicExample
+            className="login"
+            callback={() => this.Log()}
+            name="login"
+            content="Login Form"
+          />
+          <ModalBasicExample
+            className="sign"
+            callback={() => this.Log()}
+            name="sign up"
+            content="Sign Up Form"
+          />
+        </div>
+      )
+    }
+  }
+
+  Log() {
+    this.setState({login: true})
+    console.log("hahah");
+  }
+
   render() {
     return (
       <div className="App" >
@@ -139,12 +181,13 @@ class App extends Component {
   }
 }
 
+/*
 const MainPage = () => (
   <div>
     <h2>MainPage</h2>
   </div>
 );
-
+*/
 // const CatalogPage = () => (
 //   <div>
 //     <h2>CatalogPage</h2>
@@ -202,5 +245,34 @@ const Topic = ({ match }) => (
   </div>
 );
 
+
+class ModalBasicExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: ''
+    };
+  }
+
+  render() {
+      return (
+          <Modal trigger={<Button>{this.props.name}</Button>} basic size='small' style={{margin: "auto"}} closeIcon>
+            <Header icon='archive' content={this.props.content} />
+            <Modal.Content>
+              <Input focus placeholder='User Name'/>
+              <br/>
+              <br/>
+              <Input focus placeholder='Password' type="password" />
+            </Modal.Content>
+            <Modal.Actions>
+              <Button color='green' inverted onClick={this.props.callback}>
+                <Icon name='checkmark' /> Submit
+              </Button>
+            </Modal.Actions>
+          </Modal>);
+
+  }
+}
 
 export default App;
