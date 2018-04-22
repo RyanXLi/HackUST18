@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Grid, Menu, Search } from 'semantic-ui-react';
+import { Grid, Menu, Search, Card, Image } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 import Profile from './Profile.js';
@@ -202,7 +202,33 @@ const MainPage = () => (
 
 const Schedule = () => (
   <div>
-    <h2>MyArrangementPage</h2>
+      <Card.Group>
+          <Card>
+              <Card.Content>
+                  <Image floated='left' size='mini' src='https://react.semantic-ui.com/assets/images/avatar/large/steve.jpg' />
+
+                  <Card.Header>
+                      SOSC1960
+                  </Card.Header>
+                  <Card.Meta>
+                      From DR.Elliot
+                  </Card.Meta>
+                  <Card.Description>
+                      Steve wants to share with you about <strong>Secret of love</strong>
+                  </Card.Description>
+                  <Card.Description>
+                      The event will be held on <strong>2018/6/11_16:00</strong> at <strong>Refreshment Zone</strong>!
+                  </Card.Description>
+              </Card.Content>
+              <Card.Content extra>
+                  <div className='ui two buttons'>
+                      <Button basic color='green'>Contact</Button>
+                      <Button basic color='blue'>Details</Button>
+                  </div>
+              </Card.Content>
+          </Card>
+      </Card.Group>
+
   </div>
 );
 
