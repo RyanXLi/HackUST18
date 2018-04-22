@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Grid, Menu } from 'semantic-ui-react';
+import { Grid, Menu, Search } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './App.css';
 
@@ -17,8 +17,7 @@ class App extends Component {
                 position:'absolute',
                 top: "0",
                 bottom: '0',
-                right:'0',
-                left:'0'
+                width: '100%',
             },
             grid:{
                 height: '900px',
@@ -55,6 +54,31 @@ class App extends Component {
                 fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
                 fontSize: '20px',
                 color: '#ffffff',
+            },
+
+            rightCol: {
+
+            },
+            rightTopBox: {
+                paddingTop: '40px',
+                paddingBottom: '40px',
+            },
+            search: {
+
+            },
+            leftAlign: {
+                paddingLeft: '65px',
+                paddingRight: '65px',
+                // flex box
+                display: '-ms-flexbox',
+                display: '-webkit-flex',
+                display: 'flex',
+
+                msFlexAlign: 'right',
+                webkitAlignItems: 'right',
+                webkitBoxAlign: 'right',
+                alignItems: 'right',
+                justifyContent: 'right',
             }
         }
     }
@@ -87,11 +111,25 @@ class App extends Component {
                         {/*<Link className="Nav-item" to="/personalInfoPage">Personal</Link>*/}
                       </Menu>
                   </Grid.Column>
-                  <Grid.Column width={12}>
-                    <Route exact path="/" component={MainPage} />
-                    <Route path="/catalog" component={CatalogPage} />
-                    <Route path="/becomeTutor" component={BecomeTutorPage} />
-                    <Route path="/schedule" component={Schedule} />
+                  <Grid.Column width={12} style={this.style.rightCol}>
+                      <div style={this.style.rightTopBox}>
+                          <Grid>
+                              <Grid.Row>
+                                  <Grid.Column width={13} style={this.style.leftAlign}>
+                                    <Search size="large" style={this.style.search}/>
+                                  </Grid.Column>
+                                  <Grid.Column width={3}>
+
+                                  </Grid.Column>
+                              </Grid.Row>
+                          </Grid>
+                      </div>
+                      <div>
+                        <Route exact path="/" component={MainPage} />
+                        <Route path="/catalog" component={CatalogPage} />
+                        <Route path="/becomeTutor" component={BecomeTutorPage} />
+                        <Route path="/schedule" component={Schedule} />
+                      </div>
                   </Grid.Column>
             </Grid.Row>
           </Grid>

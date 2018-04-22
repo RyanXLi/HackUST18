@@ -9,7 +9,7 @@ class CourseListItem extends Component {
         this.style = {
             div: {
                 fontFamily: "Lato,'Helvetica Neue',Arial,Helvetica,sans-serif",
-                fontSize: '24px',
+                //fontSize: '16px',
                 textAlign: 'center',
             }
         }
