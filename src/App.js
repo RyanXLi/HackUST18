@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import
+    React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import 'semantic-ui-css/semantic.min.css';
 import logo from './logo.svg';
 import './App.css';
+import Profile from "./Profile";
 
 import CatalogPage from './Component/CatalogPage'
 import BecomeTutorPage from './Component/BecomeTutorPage'
@@ -22,7 +24,7 @@ class App extends Component {
         <Router>
           <div>
             <header className="App-header">
-              {/*<img src={logo} className="App-logo" alt="logo" />*/}
+              <img src={logo} className="App-logo" alt="logo" />
               <h1 className="App-title">Welcome to React</h1>
 
               <div className="Nav">
@@ -39,7 +41,7 @@ class App extends Component {
             <Route path="/catalog" component={CatalogPage} />
             <Route path="/becomeTutor" component={BecomeTutorPage} />
             <Route path="/myArrangement" component={MyArrangementPage} />
-            <Route path="/personalInfoPage" component={PersonalInfoPage} />
+            <Route path="/personalInfoPage" component={Profile} />
             <Route path="/topics" component={Topics}/>
           </div>
         </Router>
