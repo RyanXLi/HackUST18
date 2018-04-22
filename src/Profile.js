@@ -26,6 +26,7 @@ class Profile extends Component {
         this.Email= currentUser.getEmail();
         this.Credit= currentUser.get('credit');
         this.SelfDescription = currentUser.get('description');
+        this.rating = currentUser.get('rating');
 
 
     }
@@ -78,20 +79,24 @@ class Profile extends Component {
                             <Grid.Row style={{height:30 }}></Grid.Row>
 
                             <Grid.Row width={8}>
-                                <h4 > Comment1 </h4>
+                                <h4 align="left"> COMP 2611 </h4>
+                                <h6>Tutor: Mathew</h6>
+                                <p>A good introduction to MIPS Assembly</p>
                             </Grid.Row>
                             <Grid.Row width={8}>
-                                <h4 > Comment2</h4>
+                                <h4 >LIFS 1010</h4>
+                                <h6>Tutor: Zong ZHAO</h6>
+                                <p>Teach you how to learn LIFS term: the origin and the development</p>
                             </Grid.Row>
-                            <Grid.Row width={8}>
-                                <h4 > Comment3 </h4>
-                            </Grid.Row>
+
 
 
 
                         </Grid.Column>
                         <Grid.Column width = {8}>
                             <h1 > My Ratings</h1>
+                            <Grid.Row style={ {height : 30}}></Grid.Row>
+                            <h3> Overall Rating: {this.rating}</h3>
 
                         </Grid.Column>
                     </Grid.Row>
